@@ -49,15 +49,14 @@ vqa_model = BlipForQuestionAnswering.from_pretrained("Salesforce/blip-vqa-base")
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'mupparajuk31@gmail.com'
-app.config['MAIL_PASSWORD'] = 'mpcjrwyohvxpbdhf'
+mongodb_uri = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/')
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 # Download ONNX model
 
 mail = Mail(app)
-
-mongodb_uri = 'mongodb://localhost:27017/'
 client = MongoClient(mongodb_uri)
 db = client['Image_Chatbot']  
 collection = db['users']
