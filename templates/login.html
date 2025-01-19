@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/20c5629a29.js" crossorigin="anonymous"></script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    
+    /* General body styling */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .food-munch-logo {
+    width: 145px;
+    height: 55px;
+    margin-top: 6px;
+  
+}
+.navbar{
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+#navItem1:hover {
+    color: black;
+    font-weight: 500;
+}
+
+#navItem2:hover {
+    color: black;
+    font-weight: 500;
+}
+
+#navItem3:hover {
+    color: black;
+    font-weight: 500;
+}
+
+#navItem4:hover {
+    color: black;
+    font-weight: 500;
+}
+
+#navItem1 {
+    color: #323f4b;
+    font-family: "Roboto";
+}
+
+#navItem2 {
+    color: #323f4b;
+    font-family: "Roboto";
+}
+
+#navItem3 {
+    color: #323f4b;
+    font-family: "Roboto";
+}
+
+#navItem4 {
+    color: #323f4b;
+    font-family: "Roboto";
+}
+    /* Container styling */
+    .login-container {
+        max-width: 800px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        display: flex;
+        overflow: hidden;
+    }
+
+    /* Image styling */
+    .login-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f5;
+        padding: 20px;
+    }
+
+    .login-image img {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+
+    /* Form styling */
+    .login-form {
+        flex: 1;
+        padding: 40px;
+    }
+
+    .login-form h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #333333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .login-form label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #555555;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+    }
+
+    .login-form input[type="text"]:focus,
+    .login-form input[type="password"]:focus {
+        border-color: #4a90e2;
+        background-color: #ffffff;
+    }
+
+    /* Button styling */
+    .login-form button[type="submit"] {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4a90e2;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
+
+    .login-form button[type="submit"]:hover {
+        background-color: #357abd;
+    }
+
+    /* Modal styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 10px;
+        width: 50%;
+        border: 1px solid #a2a2a2;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-content h2 {
+        text-align: center;
+        color: #4a90e2;
+    }
+
+    .modal-content input[type="email"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .modal-content button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4a90e2;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .modal-content button:hover {
+        background-color: #357abd;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover {
+        color: black;
+        cursor: pointer;
+    }
+    .flash-messages {
+        margin-bottom: 20px;
+    }
+
+    .flash-message {
+        padding: 10px;
+        border-radius: 5px;
+        color: #ff0000;
+    }
+
+    .flash-message.success {
+        background-color: #4caf50; /* Green */
+    }
+
+    .flash-message.error {
+        background-color: #f44336; /* Red */
+    }
+    .logoutbutton{
+    margin-left: 5px;
+    background-color: #0f99d9;
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+}
+.logoutbutton:hover{
+    background-color: #0b77e3;
+}
+</style>
+</head>
+<body>
+    
+
+
+   <div class="login-container">
+    <div class="login-image">
+        <img src="https://t4.ftcdn.net/jpg/02/11/61/95/360_F_211619589_fnRk5LeZohVD1hWInMAQkWzAdyVlS5ox.jpg" alt="Login Image">
+    </div>
+    <div class="login-form">
+        <h1>Login</h1>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <form method="POST" action="/logging">
+            <label for="username"><i class="fas fa-user"></i> Email:</label>
+            <input type="text" name="email" id="username" required><br>
+            <label for="password"><i class="fas fa-lock"></i> Password:</label>
+            <input type="password" name="password" id="password" required><br>
+            <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+        </form>
+        <!-- Help link for login -->
+        <a href="#" id="signup"><i class="fas fa-question-circle"></i> I don't have account</a>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Enter your email to receive login help</h2>
+        <input type="email" id="recipientEmail" placeholder="Your Email">
+        <button id="sendEmail">Send</button>
+    </div>
+</div>
+</body>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var helpLink = document.getElementById("signup");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the help link, open the modal
+    helpLink.onclick = function () {
+    window.location.href = "/signup";
+    }
+
+    document.getElementById('login').onclick = ()=>{
+        window.location.href = "/login"
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+</script>

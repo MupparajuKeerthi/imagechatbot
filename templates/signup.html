@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        /* General body styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container styling */
+        .signup-container {
+            max-width: 800px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Image styling */
+        .signup-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f5;
+            padding: 20px;
+        }
+
+        .signup-image img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Form styling */
+        .signup-form {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .signup-form h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .signup-form label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #555555;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .signup-form input[type="text"],
+        .signup-form input[type="password"],
+        .signup-form input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        .signup-form input[type="text"]:focus,
+        .signup-form input[type="password"]:focus,
+        .signup-form input[type="file"]:focus {
+            border-color: #4a90e2;
+            background-color: #ffffff;
+        }
+
+        /* Button styling */
+        .signup-form button[type="submit"],
+        .signup-form button[type="button"] {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4a90e2;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .signup-form button[type="submit"]:hover,
+        .signup-form button[type="button"]:hover {
+            background-color: #357abd;
+        }
+
+        /* OTP section */
+        .otp-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        /* Custom file input */
+        .custom-file-input::before {
+            content: 'Choose Image';
+            display: inline-block;
+            background-color: #4a90e2;
+            padding: 12px 20px;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .custom-file-input:hover::before {
+            background-color: #357abd;
+        }
+        /* Password fields */
+.signup-form input[type="password"].match {
+    border-color: #4caf50; /* Green color when passwords match */
+    background-color: #e8f5e9; /* Light green background */
+}
+
+.signup-form input[type="password"].mismatch {
+    border-color: #f44336; /* Red color when passwords do not match */
+    background-color: #fce4ec; /* Light red background */
+}
+
+/* Transition effect */
+.signup-form input[type="password"] {
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+    </style>
+</head>
+<body>
+<div class="signup-container">
+    <div class="signup-image">
+        <img src="https://t4.ftcdn.net/jpg/02/11/61/95/360_F_211619589_fnRk5LeZohVD1hWInMAQkWzAdyVlS5ox.jpg" alt="Signup Image">
+    </div>
+    <div class="signup-form">
+        <h1>Sign Up</h1>
+        <form method="POST" enctype="multipart/form-data" action="/registering">
+            <label for="fullname">Full Name:</label>
+            <input type="text" name="fullname" id="fullname" required>
+
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email" required>
+            <button type="button" id="verify-email">Verify</button>
+            
+            <div class="otp-section" id="otp-section">
+                <label for="otp">Enter OTP:</label>
+                <input type="text" id="otp" name="otp">
+                <button type="button" id="verify-otp">Verify OTP</button>
+            </div>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" onkeyup="check()" required>
+
+            <label for="repassword">Re-type Password:</label>
+            <input type="password" name="repassword" id="repassword" onkeyup="check()" required>
+
+            <button type="submit" id="signup-button" disabled>Sign Up</button>
+        </form>
+        <a href="/login">I already have an Account</a>
+    </div>
+</div>
+
+<script>
+function check() {
+    var password = document.getElementById('password');
+    var repassword = document.getElementById('repassword');
+    var signupButton = document.getElementById('signup-button');
+
+    if (password.value === repassword.value && password.value.length > 0) {
+        password.classList.add('match');
+        repassword.classList.add('match');
+        password.classList.remove('mismatch');
+        repassword.classList.remove('mismatch');
+        signupButton.disabled = false;
+    } else {
+        password.classList.add('mismatch');
+        repassword.classList.add('mismatch');
+        password.classList.remove('match');
+        repassword.classList.remove('match');
+        signupButton.disabled = true;
+    }
+}
+
+
+document.getElementById('verify-email').addEventListener('click', function() {
+    const email = document.getElementById('email').value;
+    fetch('/send_otp', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+    }).then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              document.getElementById('otp-section').style.display = 'block';
+              alert('OTP sent to your email!');
+              document.getElementById('verify-email').disabled = true;
+              document.getElementById('email').readOnly = true;
+          } else {
+              alert('Error sending OTP: ' + data.message);
+          }
+      });
+});
+
+document.getElementById('verify-otp').addEventListener('click', function() {
+    const email = document.getElementById('email').value;
+    const otp = document.getElementById('otp').value;
+    fetch('/verify_otp', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, otp })
+    }).then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              document.getElementById('otp').disabled = true;
+              document.getElementById('verify-otp').disabled = true;
+              document.getElementById('signup-button').disabled = false;
+              alert('OTP verified! You can now sign up.');
+          } else {
+              alert('Invalid OTP: ' + data.message);
+          }
+      });
+}); // <-- Added closing parenthesis and semicolon here
+
+</script>
+</body>
+</html>
