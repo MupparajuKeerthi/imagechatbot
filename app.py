@@ -40,11 +40,11 @@ os.makedirs(models_folder, exist_ok=True)
 modelx2_file_path = os.path.join(models_folder, "modelx2.ort")
 
 # BLIP models for captioning and VQA
-caption_processor = BlipProcessor.from_pretrained("models/blip-captioning")
-caption_model = BlipForConditionalGeneration.from_pretrained("models/blip-captioning")
+caption_processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
+caption_model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
 
-vqa_processor = BlipProcessor.from_pretrained("models/blip-vqa")
-vqa_model = BlipForQuestionAnswering.from_pretrained("models/blip-vqa")
+vqa_processor = BlipProcessor.from_pretrained("Salesforce/blip-vqa-base")
+vqa_model = BlipForQuestionAnswering.from_pretrained("Salesforce/blip-vqa-base")
 
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
